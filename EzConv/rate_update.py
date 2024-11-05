@@ -1,5 +1,6 @@
 import requests
 import csv
+import arrow
 from bs4 import BeautifulSoup as BS 
 
 def update_currency_rate():
@@ -29,9 +30,10 @@ def update_currency_rate():
         rows = [[value[0], value[1], value[2]] for value in reader]
         for x in range(len(curr_values)):
             rows[x][1] = curr_values[x].replace(',', '.')
-        print(rows)
+        # print(rows)
     with open("bin/currency.csv", mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file, delimiter=";")
         writer.writerows(rows)
-    with open("bin/log.txt", mode="w") as file: #TODO сделать логи
-        pass
+    
+    with open("bin/log.txt", mode="a") as file: #TODO// сделать логи
+        file.write(f'updated {arrow.now().format('YYYY-MM-DD HH:mm:ss')}\n')

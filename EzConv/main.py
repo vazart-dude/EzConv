@@ -26,20 +26,21 @@ currency_list = {
     "KZT": "img/KZT20.png",
 }
 
-#TODO сделать наконец конвертацию по актуальному курсу
-#TODO//сделать обновление курса
+# TODO сделать наконец конвертацию по актуальному курсу
+# TODO//сделать обновление курса
 # TODO// сделать изменение картинки в зависимости от валюты
 # TODO// диалоговое окно для выхода
+
 
 class Converter(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("EzConv.ui", self)
+        uic.loadUi("GUI/EzConv.ui", self)
         self.setFixedSize(270, 370)
 
         icon = QIcon("img/Bitcoin.svg.png")
         self.setWindowIcon(icon)
-        
+
         with open("bin/last_values.txt") as file:
             values = file.read().split()
             self.currency1.setCurrentText(values[0])
@@ -47,19 +48,18 @@ class Converter(QMainWindow):
             self.currency3.setCurrentText(values[2])
             self.currency4.setCurrentText(values[3])
             self.currency5.setCurrentText(values[4])
-            
-        update_currency_rate()
-            
-        self.reset_curr.triggered.connect(self.reset)   #сброс валют
 
-        self.exit_btn.triggered.connect(self.execution) # выход через menu bar
-        
+        update_currency_rate()  # обновление курса
+
+        self.reset_curr.triggered.connect(self.reset)  # сброс валют
+
+        self.exit_btn.triggered.connect(self.execution)  # выход через menu bar
+
         self.refresh_rate.triggered.connect(update_currency_rate)
 
         self.pushButton.clicked.connect(
             self.convert
-        )  # кнопка перевода  #! сейчас не используется
-
+        )  # кнопка перевода  #! сейчас не используется и скорее всего не будет
 
         self.action()
 
@@ -71,7 +71,7 @@ class Converter(QMainWindow):
         self.currency4.activated.connect(self.action)
         self.currency5.activated.connect(self.action)
 
-    def action(self):
+    def action(self):  # обновление картинок + сохранение последних выбранных валют
         self.img1.setPixmap(QPixmap(currency_list[self.currency1.currentText()]))
         self.img2.setPixmap(QPixmap(currency_list[self.currency2.currentText()]))
         self.img3.setPixmap(QPixmap(currency_list[self.currency3.currentText()]))
@@ -87,11 +87,11 @@ class Converter(QMainWindow):
         ]
         with open("bin/last_values.txt", mode="w") as file:
             file.write(" ".join(values))
-            
-    def convert(self):
-        pass 
-    
-    def reset(self):
+
+    def convert(self):  # конвертирование
+        pass
+
+    def reset(self):  # сброс валют
         self.currency1.setCurrentText("BTC")
         self.currency2.setCurrentText("USDT")
         self.currency3.setCurrentText("USD")
@@ -99,17 +99,16 @@ class Converter(QMainWindow):
         self.currency5.setCurrentText("RUB")
         self.action()
 
-    def execution(self):
+    def execution(self):  # выход
         dialog = Exit()
         dialog.show()
         dialog.exec()
 
 
-
 class Exit(QDialog):
     def __init__(self, parent=Converter):
         super().__init__()
-        uic.loadUi("exit_dialog.ui", self)
+        uic.loadUi("GUI/exit_dialog.ui", self)
         self.setWindowTitle("Выход")
         self.exit_accept.accepted.connect(self.ex)
 
