@@ -36,4 +36,4 @@ def update_currency_rate():
         writer.writerows(rows)
     
     with open("bin/log.txt", mode="a") as file: #TODO// сделать логи
-        file.write(f'updated {arrow.now().format('YYYY-MM-DD HH:mm:ss')}\n')
+        file.write(f'currency updated {arrow.now().format('YYYY-MM-DD HH:mm')}\n')
