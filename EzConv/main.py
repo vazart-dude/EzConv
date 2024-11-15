@@ -58,7 +58,7 @@ class Converter(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi(GUI_path, self)
-        self.setFixedSize(270, 370)
+        self.setFixedSize(270, 340)
 
         icon = QIcon("img/Bitcoin.svg.png")
         self.setWindowIcon(icon)
@@ -75,11 +75,12 @@ class Converter(QMainWindow):
 
         self.read_currency()
 
-        self.free = True
 
         self.reset_curr.triggered.connect(self.reset)  # сброс валют
 
         self.reset_values_btn.clicked.connect(self.reset_values)
+        
+        self.reset_values_menu.triggered.connect(self.reset_values)
 
         self.exit_btn.triggered.connect(self.execution)  # выход через menu bar
 
@@ -88,10 +89,6 @@ class Converter(QMainWindow):
             self.curr_error_test
         )  # проверка ошибок обновления крипты
         self.refresh_rate.triggered.connect(self.read_currency)
-
-        self.pushButton.clicked.connect(
-            self.curr_update_error_msg
-        )  # кнопка перевода  #! используется для тестирования ошибки
 
         self.action()
 
@@ -141,7 +138,22 @@ class Converter(QMainWindow):
         ]
         changing_line_text = eval(lines[line]).text()
         if changing_line_text == '':
-            self.reset_values()
+            self.reset_values() 
+        elif (not changing_line_text[-1].isnumeric() and changing_line_text[-1] != '.') or changing_line_text.count('.') > 1:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.setText("Введите корректное значение")
+            msg.setWindowTitle("Ошибка")
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+            msg.setModal(True)
+            msg.exec()
+            self.lineEdit_1.blockSignals(False)
+            self.lineEdit_2.blockSignals(False)
+            self.lineEdit_3.blockSignals(False)
+            self.lineEdit_4.blockSignals(False)
+            self.lineEdit_5.blockSignals(False)
+            eval(lines[line]).setText(changing_line_text[:-1])
+            return ValueError 
         else:
             changing_currency = eval(currencies[line]).currentText()
             del lines[line]

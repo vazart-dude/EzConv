@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>270</width>
-    <height>370</height>
+    <height>343</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,33 +47,6 @@
      <property name="verticalSpacing">
       <number>6</number>
      </property>
-     <item row="3" column="0">
-      <widget class="QLabel" name="img2">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="img1">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="img4">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="2">
       <widget class="QComboBox" name="currency1">
        <item>
@@ -158,6 +131,33 @@
        </item>
       </widget>
      </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="img2">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="img1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="img4">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
      <item row="4" column="0">
       <widget class="QLabel" name="img3">
        <property name="text">
@@ -194,19 +194,6 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="3">
-      <widget class="QLineEdit" name="lineEdit_2">
-       <property name="inputMethodHints">
-        <set>Qt::ImhDigitsOnly</set>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="7" column="3">
       <widget class="QLineEdit" name="lineEdit_5">
        <property name="inputMethodHints">
@@ -220,8 +207,8 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="3">
-      <widget class="QLineEdit" name="lineEdit_3">
+     <item row="3" column="3">
+      <widget class="QLineEdit" name="lineEdit_2">
        <property name="inputMethodHints">
         <set>Qt::ImhDigitsOnly</set>
        </property>
@@ -233,23 +220,88 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="3">
-      <widget class="QLineEdit" name="lineEdit_4">
-       <property name="contextMenuPolicy">
-        <enum>Qt::DefaultContextMenu</enum>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="inputMethodHints">
-        <set>Qt::ImhDigitsOnly</set>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
+     <item row="4" column="2">
+      <widget class="QComboBox" name="currency3">
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>ETH</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SOL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BNB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOGE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TRX</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>XRP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TON</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item row="3" column="2">
@@ -336,88 +388,36 @@
        </item>
       </widget>
      </item>
-     <item row="4" column="2">
-      <widget class="QComboBox" name="currency3">
-       <item>
-        <property name="text">
-         <string>USD</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>BTC</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>ETH</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>USDT</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>SOL</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>BNB</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>DOGE</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>TRX</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>XRP</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>TON</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>EUR</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>RUB</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>AED</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>CNY</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>JPY</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>KZT</string>
-        </property>
-       </item>
+     <item row="5" column="3">
+      <widget class="QLineEdit" name="lineEdit_4">
+       <property name="contextMenuPolicy">
+        <enum>Qt::DefaultContextMenu</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QLineEdit" name="lineEdit_3">
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
       </widget>
      </item>
      <item row="5" column="2">
@@ -590,24 +590,11 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>300</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Перевести</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="reset_values_btn">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>300</y>
+      <x>180</x>
+      <y>270</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -621,8 +608,8 @@
      <rect>
       <x>10</x>
       <y>260</y>
-      <width>231</width>
-      <height>31</height>
+      <width>171</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -647,6 +634,7 @@
      <string>Menu</string>
     </property>
     <addaction name="add_curr"/>
+    <addaction name="reset_values_menu"/>
     <addaction name="reset_curr"/>
     <addaction name="refresh_rate"/>
     <addaction name="separator"/>
@@ -682,6 +670,14 @@
    </property>
    <property name="shortcut">
     <string>F3</string>
+   </property>
+  </action>
+  <action name="reset_values_menu">
+   <property name="text">
+    <string>Сбросить значения</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
    </property>
   </action>
  </widget>

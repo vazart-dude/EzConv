@@ -1,0 +1,6 @@
+PyQt6
+bs4
+requests
+arrow
+csv
+
