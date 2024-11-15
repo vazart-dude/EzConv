@@ -1,4 +1,5 @@
 <div align="center"> 
+<img src="https://img.shields.io/badge/version-0.0.2-blue?style=flat-square">
 Работает конвертация и обновление курса валют.
 Некоторые мелкие функции все еще в работе.
 <br> 
