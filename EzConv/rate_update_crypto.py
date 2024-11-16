@@ -23,7 +23,7 @@ curr_values = []
 def update_currency_rate_crypto():
     for coin in crypto_list:
         try:
-            # x = '1' + 0 #!! не трогать, это для активации ошибки, иначе будет тратиться API
+            # x = '1' + 0 #!! для активации ошибки, чтобы не тратился API
             coin_api = coin[1]
             url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin_api}&vs_currencies=rub&precision=4"
             headers = {"accept": "application/json", "x-cg-demo-api-key": "CG-Nq3bK18xPt48dFjK4u5yR5uy"}
