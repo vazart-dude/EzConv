@@ -1,31 +1,22 @@
 import os
-import PyQt6.QtCore
 import csv
 from PyQt6.QtWidgets import (
-    QWidget,
     QMainWindow,
     QApplication,
-    QLabel,
-    QComboBox,
-    QDialog,
-    QDialogButtonBox,
     QMessageBox,
-    QLineEdit,
 )
 from PyQt6 import uic
 from PyQt6.QtGui import QIcon, QPixmap
 from rate_update import update_currency_rate
 from rate_update_crypto import update_currency_rate_crypto
-import PyQt6
 import sys
-import time
 
 script_path = os.path.dirname(os.path.abspath(__file__))
 currency_path = os.path.join(script_path, "bin", "currency.csv")
 crypto_currency_path = os.path.join(script_path, "bin", "crypto_currency.csv")
 GUI_path = os.path.join(script_path, "GUI", "EzConv.ui")
-last_values_path = os.path.join(script_path, 'bin', 'last_values.txt')
-icon_path = os.path.join(script_path, 'img', 'Bitcoin.svg.png')
+last_values_path = os.path.join(script_path, "bin", "last_values.txt")
+icon_path = os.path.join(script_path, "img", "Bitcoin.svg.png")
 
 crypto_list = ("BTC", "ETH", "USDT", "SOL", "BNB", "DOGE", "TRX", "XRP", "TON")
 
@@ -94,7 +85,6 @@ class Converter(QMainWindow):
         self.last_changed = 6
 
         self.action(6)
-        
 
         # self.currency1 = QComboBox
         # self.lineEdit_1 = QLineEdit
@@ -223,23 +213,29 @@ class Converter(QMainWindow):
         self.lineEdit_3.blockSignals(True)
         self.lineEdit_4.blockSignals(True)
         self.lineEdit_5.blockSignals(True)
-        if self.last_changed != 6 and self.lines[0] != '':
+        if self.last_changed != 6 and self.lines[0] != "":
             if self.last_changed == line:
                 self.convert(line)
             else:
                 changing_line_text = eval(self.lines[self.last_changed]).text()
-                changing_currency = eval(self.currencies[self.last_changed]).currentText()
+                changing_currency = eval(
+                    self.currencies[self.last_changed]
+                ).currentText()
                 print(changing_line_text)
                 print(changing_currency)
                 if changing_currency in crypto_list:
                     for row in self.crypto_rows:
                         if row[0] == changing_currency:
-                            changing_currency, changing_rate, changing_multiplicator = row
+                            changing_currency, changing_rate, changing_multiplicator = (
+                                row
+                            )
                             break
                 else:
                     for row in self.curr_rows:
                         if row[0] == changing_currency:
-                            changing_currency, changing_rate, changing_multiplicator = row
+                            changing_currency, changing_rate, changing_multiplicator = (
+                                row
+                            )
                             break
                 making_line = self.lines[line]
                 making_currency = eval(self.currencies[line]).currentText()

@@ -633,7 +633,6 @@
     <property name="title">
      <string>Menu</string>
     </property>
-    <addaction name="add_curr"/>
     <addaction name="reset_values_menu"/>
     <addaction name="reset_curr"/>
     <addaction name="refresh_rate"/>
