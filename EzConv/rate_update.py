@@ -12,11 +12,6 @@ def update_currency_rate():
     t = html.find(class_=class_).text
 
     arr = t = t.split()[12:]
-    t = "\n".join(t)
-
-    with open("bin/currency_raw.txt", mode="w") as file:
-        file.write(t)
-        pass
 
     curr_values = []
     for num in arr:
