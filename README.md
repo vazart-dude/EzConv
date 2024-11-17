@@ -5,7 +5,7 @@
 Работает конвертация и обновление курса валют.
 Некоторые мелкие функции все еще в работе.
 <br> 
-<a href="https://drive.google.com/file/d/1oT9T856Je9G4LokhvEBf8150Gg2ZWHHx/view?usp=sharing">Ссылка на .exe файл</a>
+<a href="https://drive.google.com/file/d/1Bp047L1wOhKH65inC1hp3FOg30Wv7Gzv/view?usp=sharing">Ссылка на .exe файл</a>
 
 
 
