@@ -2,6 +2,11 @@ import requests
 import csv
 import arrow
 from bs4 import BeautifulSoup as BS 
+import os
+
+script_path = os.path.dirname(os.path.abspath(__file__))
+currency_path = os.path.join(script_path, "bin", "currency.csv")
+log_path = os.path.join(script_path, "bin", "log.txt")
 
 def update_currency_rate():
     url = "https://www.cbr.ru/currency_base/daily/"
@@ -20,15 +25,15 @@ def update_currency_rate():
 
     # print(curr_values) #!
 
-    with open("bin/currency.csv", encoding="utf8") as csvfile:
+    with open(currency_path, encoding="utf8") as csvfile:
         reader = csv.reader(csvfile, delimiter=";", quotechar='"')
         rows = [[value[0], value[1], value[2]] for value in reader]
         for x in range(len(curr_values)):
             rows[x][1] = curr_values[x].replace(',', '.')
         # print(rows)
-    with open("bin/currency.csv", mode='w', newline='', encoding='utf-8') as file:
+    with open(currency_path, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file, delimiter=";")
         writer.writerows(rows)
     
-    with open("bin/log.txt", mode="a") as file: #TODO// сделать логи
+    with open(log_path, mode="a") as file: #TODO// сделать логи
         file.write(f'currency updated {arrow.now().format('YYYY-MM-DD HH:mm')}\n')

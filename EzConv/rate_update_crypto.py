@@ -2,6 +2,12 @@ import requests
 import csv
 import arrow
 from bs4 import BeautifulSoup as BS
+import os
+
+
+script_path = os.path.dirname(os.path.abspath(__file__))
+crypto_currency_path = os.path.join(script_path, "bin", "crypto_currency.csv")
+log_path = os.path.join(script_path, "bin", "log.txt")
 
 crypto_list = (
     ["BTC", "bitcoin"],
@@ -35,7 +41,7 @@ def update_currency_rate_crypto():
             print(f"Error: {e} for {coin[0]}")
             return True
         
-    with open("bin/crypto_currency.csv", encoding="utf8") as csvfile:
+    with open(crypto_currency_path, encoding="utf8") as csvfile:
         reader = csv.reader(csvfile, delimiter=";", quotechar='"')
         rows = [[value[0], value[1]] for value in reader]
         for x in range(len(curr_values)):
@@ -43,12 +49,12 @@ def update_currency_rate_crypto():
             rows[x].append(1)
         print("passed reader")
     
-    with open("bin/crypto_currency.csv", mode='w', newline='', encoding='utf-8') as file:
+    with open(crypto_currency_path, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file, delimiter=";")
         writer.writerows(rows)
         print("passed writer")
     
-    with open("bin/log.txt", mode="a") as file: #TODO// сделать логи
+    with open(log_path, mode="a") as file: #TODO// сделать логи
         file.write(f'ccrypto updated {arrow.now().format('YYYY-MM-DD HH:mm')}\n')
 
 

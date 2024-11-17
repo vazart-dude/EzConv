@@ -24,26 +24,28 @@ script_path = os.path.dirname(os.path.abspath(__file__))
 currency_path = os.path.join(script_path, "bin", "currency.csv")
 crypto_currency_path = os.path.join(script_path, "bin", "crypto_currency.csv")
 GUI_path = os.path.join(script_path, "GUI", "EzConv.ui")
+last_values_path = os.path.join(script_path, 'bin', 'last_values.txt')
+icon_path = os.path.join(script_path, 'img', 'Bitcoin.svg.png')
 
 crypto_list = ("BTC", "ETH", "USDT", "SOL", "BNB", "DOGE", "TRX", "XRP", "TON")
 
 currency_list = {
-    "USD": "img/USD20.png",
-    "RUB": "img/RUB20.png",
-    "BTC": "img/BTC20.png",
-    "ETH": "img/ETH20.png",
-    "USDT": "img/USDT20.png",
-    "EUR": "img/EUR20.png",
-    "AED": "img/AED20.png",
-    "CNY": "img/CNY20.png",
-    "JPY": "img/JPY20.png",
-    "KZT": "img/KZT20.png",
-    "SOL": "img/SOL20.png",
-    "BNB": "img/BNB20.png",
-    "DOGE": "img/DOGE20.png",
-    "TRX": "img/TRX20.png",
-    "XRP": "img/XRP20.png",
-    "TON": "img/TON20.png",
+    "USD": os.path.join(script_path, "img", "USD20.png"),
+    "RUB": os.path.join(script_path, "img", "RUB20.png"),
+    "BTC": os.path.join(script_path, "img", "BTC20.png"),
+    "ETH": os.path.join(script_path, "img", "ETH20.png"),
+    "USDT": os.path.join(script_path, "img", "USDT20.png"),
+    "EUR": os.path.join(script_path, "img", "EUR20.png"),
+    "AED": os.path.join(script_path, "img", "AED20.png"),
+    "CNY": os.path.join(script_path, "img", "CNY20.png"),
+    "JPY": os.path.join(script_path, "img", "JPY20.png"),
+    "KZT": os.path.join(script_path, "img", "KZT20.png"),
+    "SOL": os.path.join(script_path, "img", "SOL20.png"),
+    "BNB": os.path.join(script_path, "img", "BNB20.png"),
+    "DOGE": os.path.join(script_path, "img", "DOGE20.png"),
+    "TRX": os.path.join(script_path, "img", "TRX20.png"),
+    "XRP": os.path.join(script_path, "img", "XRP20.png"),
+    "TON": os.path.join(script_path, "img", "TON20.png"),
 }
 
 # TODO проверка интернет соединения
@@ -60,10 +62,10 @@ class Converter(QMainWindow):
         uic.loadUi(GUI_path, self)
         self.setFixedSize(270, 340)
 
-        icon = QIcon("img/Bitcoin.svg.png")
+        icon = QIcon(icon_path)
         self.setWindowIcon(icon)
 
-        with open("bin/last_values.txt") as file:
+        with open(last_values_path) as file:
             values = file.read().split()
             self.currency1.setCurrentText(values[0])
             self.currency2.setCurrentText(values[1])
@@ -276,7 +278,7 @@ class Converter(QMainWindow):
             self.currency4.currentText(),
             self.currency5.currentText(),
         ]
-        with open("bin/last_values.txt", mode="w") as file:
+        with open(last_values_path, mode="w") as file:
             file.write(" ".join(values))
 
     def reset(self):  # сброс валют
