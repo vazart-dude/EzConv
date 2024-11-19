@@ -1,5 +1,7 @@
 import os
 import csv
+import sys
+import requests
 from PyQt6.QtWidgets import (
     QMainWindow,
     QApplication,
@@ -9,7 +11,6 @@ from PyQt6 import uic
 from PyQt6.QtGui import QIcon, QPixmap
 from rate_update import update_currency_rate
 from rate_update_crypto import update_currency_rate_crypto
-import sys
 
 script_path = os.path.dirname(os.path.abspath(__file__))
 currency_path = os.path.join(script_path, "bin", "currency.csv")
@@ -63,8 +64,11 @@ class Converter(QMainWindow):
             self.currency3.setCurrentText(values[2])
             self.currency4.setCurrentText(values[3])
             self.currency5.setCurrentText(values[4])
-
-        update_currency_rate()  # обновление курса
+            
+        if self.check_internet():
+            update_currency_rate()  # обновление курса
+        else:
+            self.internet_connection_error_msg()
 
         self.read_currency()
 
@@ -77,6 +81,7 @@ class Converter(QMainWindow):
         self.exit_btn.triggered.connect(self.execution)  # выход через menu bar
 
         self.refresh_rate.triggered.connect(update_currency_rate)  # обновление валют
+        
         self.refresh_rate.triggered.connect(
             self.curr_error_test
         )  # проверка ошибок обновления крипты
@@ -292,6 +297,22 @@ class Converter(QMainWindow):
         self.lineEdit_4.setText("")
         self.lineEdit_5.setText("")
 
+    def check_internet(x):
+        try:
+            response = requests.get('https://www.google.com', timeout=5)
+            return response.status_code == 200
+        except requests.ConnectionError:
+            return False
+    
+    def internet_connection_error_msg(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Warning)
+        msg.setText("Нет интернет подключения,\nбудут использоваться устаревшие данные")
+        msg.setWindowTitle("Нет подключения")
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.setModal(True)
+        msg.exec()
+    
     def curr_update_msg(self):  # окно успешного обновления
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Information)
