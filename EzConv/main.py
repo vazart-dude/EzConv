@@ -89,22 +89,42 @@ class Converter(QMainWindow):
 
         self.last_changed = 6
 
-        self.action(6)
+        self.img_change()
 
         # self.currency1 = QComboBox
         # self.lineEdit_1 = QLineEdit
 
-        self.currency1.activated.connect(lambda: self.action(0))
-        self.currency2.activated.connect(lambda: self.action(1))
-        self.currency3.activated.connect(lambda: self.action(2))
-        self.currency4.activated.connect(lambda: self.action(3))
-        self.currency5.activated.connect(lambda: self.action(4))
+        self.currency1.activated.connect(lambda: self.img_change())
+        self.currency1.activated.connect(lambda: self.local_covert(0))
+        self.currency2.activated.connect(lambda: self.img_change())
+        self.currency2.activated.connect(lambda: self.local_covert(1))
+        self.currency3.activated.connect(lambda: self.img_change())
+        self.currency3.activated.connect(lambda: self.local_covert(2))
+        self.currency4.activated.connect(lambda: self.img_change())
+        self.currency4.activated.connect(lambda: self.local_covert(3))
+        self.currency5.activated.connect(lambda: self.img_change())
+        self.currency5.activated.connect(lambda: self.local_covert(4))
 
         self.lineEdit_1.textChanged.connect(lambda: self.convert(0))
         self.lineEdit_2.textChanged.connect(lambda: self.convert(1))
         self.lineEdit_3.textChanged.connect(lambda: self.convert(2))
         self.lineEdit_4.textChanged.connect(lambda: self.convert(3))
         self.lineEdit_5.textChanged.connect(lambda: self.convert(4))
+        
+        self.lines = [
+            "self.lineEdit_1",
+            "self.lineEdit_2",
+            "self.lineEdit_3",
+            "self.lineEdit_4",
+            "self.lineEdit_5",
+        ]
+        self.currencies = [
+            "self.currency1",
+            "self.currency2",
+            "self.currency3",
+            "self.currency4",
+            "self.currency5",
+        ]
 
     def read_currency(self):
         with open(currency_path, encoding="utf8") as csvfile:
@@ -121,20 +141,6 @@ class Converter(QMainWindow):
         self.lineEdit_3.blockSignals(True)
         self.lineEdit_4.blockSignals(True)
         self.lineEdit_5.blockSignals(True)
-        self.lines = [
-            "self.lineEdit_1",
-            "self.lineEdit_2",
-            "self.lineEdit_3",
-            "self.lineEdit_4",
-            "self.lineEdit_5",
-        ]
-        self.currencies = [
-            "self.currency1",
-            "self.currency2",
-            "self.currency3",
-            "self.currency4",
-            "self.currency5",
-        ]
         changing_line_text = eval(self.lines[line]).text()
         if changing_line_text == "":
             self.reset_values()
@@ -205,20 +211,31 @@ class Converter(QMainWindow):
         self.last_changed = line
         print(self.last_changed)
 
-    def action(
-        self, line
+    def img_change(
+        self,
     ):  # обновление картинок + сохранение последних выбранных валют
         self.img1.setPixmap(QPixmap(currency_list[self.currency1.currentText()]))
         self.img2.setPixmap(QPixmap(currency_list[self.currency2.currentText()]))
         self.img3.setPixmap(QPixmap(currency_list[self.currency3.currentText()]))
         self.img4.setPixmap(QPixmap(currency_list[self.currency4.currentText()]))
         self.img5.setPixmap(QPixmap(currency_list[self.currency5.currentText()]))
+        values = [
+            self.currency1.currentText(),
+            self.currency2.currentText(),
+            self.currency3.currentText(),
+            self.currency4.currentText(),
+            self.currency5.currentText(),
+        ]
+        with open(last_values_path, mode="w") as file:
+            file.write(" ".join(values))
+        
+    def local_covert(self, line):
         self.lineEdit_1.blockSignals(True)
         self.lineEdit_2.blockSignals(True)
         self.lineEdit_3.blockSignals(True)
         self.lineEdit_4.blockSignals(True)
         self.lineEdit_5.blockSignals(True)
-        if self.last_changed != 6 and self.lines[0] != "":
+        if self.last_changed != 6 and eval(self.lines[0]).text() != "":
             if self.last_changed == line:
                 self.convert(line)
             else:
@@ -272,23 +289,18 @@ class Converter(QMainWindow):
         self.lineEdit_4.blockSignals(False)
         self.lineEdit_5.blockSignals(False)
 
-        values = [
-            self.currency1.currentText(),
-            self.currency2.currentText(),
-            self.currency3.currentText(),
-            self.currency4.currentText(),
-            self.currency5.currentText(),
-        ]
-        with open(last_values_path, mode="w") as file:
-            file.write(" ".join(values))
-
     def reset(self):  # сброс валют
         self.currency1.setCurrentText("BTC")
         self.currency2.setCurrentText("USDT")
         self.currency3.setCurrentText("USD")
         self.currency4.setCurrentText("EUR")
         self.currency5.setCurrentText("RUB")
-        self.action(6)
+        self.lineEdit_1.setText("")
+        self.lineEdit_2.setText("")
+        self.lineEdit_3.setText("")
+        self.lineEdit_4.setText("")
+        self.lineEdit_5.setText("")
+        self.img_change()
 
     def reset_values(self):
         self.lineEdit_1.setText("")
