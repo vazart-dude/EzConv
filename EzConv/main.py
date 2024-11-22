@@ -15,7 +15,7 @@ from rate_update_crypto import update_currency_rate_crypto
 script_path = os.path.dirname(os.path.abspath(__file__))
 currency_path = os.path.join(script_path, "bin", "currency.csv")
 crypto_currency_path = os.path.join(script_path, "bin", "crypto_currency.csv")
-GUI_path = os.path.join(script_path, "GUI", "EzConv.ui")
+GUI_path = os.path.join(script_path, "GUI", "EzConv_design3.ui")
 last_values_path = os.path.join(script_path, "bin", "last_values.txt")
 icon_path = os.path.join(script_path, "img", "Bitcoin.svg.png")
 
@@ -40,7 +40,7 @@ currency_list = {
     "TON": os.path.join(script_path, "img", "TON20.png"),
 }
 
-# TODO проверка интернет соединения
+# TODO// проверка интернет соединения
 # TODO// сделать, чтобы при смене валюты менялось значение
 # TODO// сделать наконец конвертацию по актуальному курсу
 # TODO//сделать обновление курса
@@ -52,7 +52,7 @@ class Converter(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi(GUI_path, self)
-        self.setFixedSize(270, 340)
+        self.setFixedSize(270, 344)
 
         icon = QIcon(icon_path)
         self.setWindowIcon(icon)
@@ -229,7 +229,7 @@ class Converter(QMainWindow):
         with open(last_values_path, mode="w") as file:
             file.write(" ".join(values))
         
-    def local_covert(self, line):
+    def local_covert(self, line):  # конвертирование еденичной строки
         self.lineEdit_1.blockSignals(True)
         self.lineEdit_2.blockSignals(True)
         self.lineEdit_3.blockSignals(True)

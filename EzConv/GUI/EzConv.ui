@@ -21,6 +21,9 @@
     <normalon>../../.designer/backup/Bitcoin.svg.png</normalon>
    </iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="maximumSize">
     <size>
