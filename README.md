@@ -1,9 +1,5 @@
 <div align="center"> 
-<<<<<<< HEAD
 <img src="https://img.shields.io/badge/version-0.0.3d--stable-blue?style=flat-square" height="20">
-=======
-<img src="https://img.shields.io/badge/version-0.0.3c-blue?style=flat-square" height="20">
->>>>>>> 147e56a665d2490c2781bbc8eea379809c196078
 <img src="https://img.shields.io/badge/.exe_size-86.7_MB-green?style=flat-square" height="20">
 <br>
 Работает конвертация и обновление курса валют.
