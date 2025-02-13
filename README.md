@@ -7,7 +7,3 @@
 <br>
 Обновленный дизайн!
 <br> 
-<a href="https://drive.google.com/file/d/1Bp047L1wOhKH65inC1hp3FOg30Wv7Gzv/view?usp=sharing">Ссылка на .exe файл</a>
-(Без дизайна)
-
-
