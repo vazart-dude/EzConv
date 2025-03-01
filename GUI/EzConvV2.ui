@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>270</width>
+    <height>370</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>EzConv</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="bitcoin">
+    <normalon>../../.designer/backup/Bitcoin.svg.png</normalon>
+   </iconset>
+  </property>
+  <property name="animated">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="maximumSize">
+    <size>
+     <width>270</width>
+     <height>329</height>
+    </size>
+   </property>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>-10</y>
+      <width>246</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="img1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="img2">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QComboBox" name="currency1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/BTC20.png</normaloff>img/BTC20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/USDT20.png</normaloff>img/USDT20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/USD20.png</normaloff>img/USD20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/EUR20.png</normaloff>img/EUR20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/RUB20.png</normaloff>img/RUB20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/AED20.png</normaloff>img/AED20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/CNY20.png</normaloff>img/CNY20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/JPY20.png</normaloff>img/JPY20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/KZT20.png</normaloff>img/KZT20.png</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="img4">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="img3">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="img5">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QLineEdit" name="lineEdit_9">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QLineEdit" name="lineEdit_10">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QLineEdit" name="lineEdit_11">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QLineEdit" name="lineEdit_12">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="QLineEdit" name="lineEdit_13">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QComboBox" name="currency2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/USDT20.png</normaloff>img/USDT20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/BTC20.png</normaloff>img/BTC20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/USD20.png</normaloff>img/USD20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/EUR20.png</normaloff>img/EUR20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/RUB20.png</normaloff>img/RUB20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/AED20.png</normaloff>img/AED20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/CNY20.png</normaloff>img/CNY20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/JPY20.png</normaloff>img/JPY20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/KZT20.png</normaloff>img/KZT20.png</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QComboBox" name="currency3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/USD20.png</normaloff>img/USD20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/BTC20.png</normaloff>img/BTC20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/USDT20.png</normaloff>img/USDT20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/EUR20.png</normaloff>img/EUR20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/RUB20.png</normaloff>img/RUB20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/AED20.png</normaloff>img/AED20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/CNY20.png</normaloff>img/CNY20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/JPY20.png</normaloff>img/JPY20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/KZT20.png</normaloff>img/KZT20.png</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QComboBox" name="currency4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/EUR20.png</normaloff>img/EUR20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/BTC20.png</normaloff>img/BTC20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/USDT20.png</normaloff>img/USDT20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/USD20.png</normaloff>img/USD20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/RUB20.png</normaloff>img/RUB20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/AED20.png</normaloff>img/AED20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/CNY20.png</normaloff>img/CNY20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/JPY20.png</normaloff>img/JPY20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/KZT20.png</normaloff>img/KZT20.png</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QComboBox" name="currency5">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/RUB20.png</normaloff>img/RUB20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/BTC20.png</normaloff>img/BTC20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/USDT20.png</normaloff>img/USDT20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/USD20.png</normaloff>img/USD20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/EUR20.png</normaloff>img/EUR20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/AED20.png</normaloff>img/AED20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/CNY20.png</normaloff>img/CNY20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/JPY20.png</normaloff>img/JPY20.png</iconset>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>img/KZT20.png</normaloff>img/KZT20.png</iconset>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>300</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Перевести</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>300</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сбросить</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>270</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="add_curr"/>
+    <addaction name="refresh"/>
+    <addaction name="separator"/>
+    <addaction name="exit_btn"/>
+   </widget>
+   <addaction name="menuMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="add_curr">
+   <property name="text">
+    <string>Добавить Валюту</string>
+   </property>
+  </action>
+  <action name="refresh">
+   <property name="text">
+    <string>Обновить курс</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="exit_btn">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

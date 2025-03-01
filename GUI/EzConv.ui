@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>270</width>
+    <height>343</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>EzConv</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="bitcoin">
+    <normalon>../../.designer/backup/Bitcoin.svg.png</normalon>
+   </iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="maximumSize">
+    <size>
+     <width>270</width>
+     <height>329</height>
+    </size>
+   </property>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>-10</y>
+      <width>246</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>6</number>
+     </property>
+     <item row="1" column="2">
+      <widget class="QComboBox" name="currency1">
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>ETH</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SOL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BNB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOGE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TRX</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>XRP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TON</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="img2">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="img1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="img4">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="img3">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="img5">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QLineEdit" name="lineEdit_1">
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="3">
+      <widget class="QLineEdit" name="lineEdit_5">
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QLineEdit" name="lineEdit_2">
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QComboBox" name="currency3">
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>ETH</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SOL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BNB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOGE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TRX</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>XRP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TON</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QComboBox" name="currency2">
+       <item>
+        <property name="text">
+         <string>ETH</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SOL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BNB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOGE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TRX</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>XRP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TON</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="QLineEdit" name="lineEdit_4">
+       <property name="contextMenuPolicy">
+        <enum>Qt::DefaultContextMenu</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QLineEdit" name="lineEdit_3">
+       <property name="inputMethodHints">
+        <set>Qt::ImhDigitsOnly</set>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QComboBox" name="currency4">
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>ETH</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SOL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BNB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOGE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TRX</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>XRP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TON</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="7" column="2">
+      <widget class="QComboBox" name="currency5">
+       <item>
+        <property name="text">
+         <string>RUB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BTC</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>ETH</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USDT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SOL</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>BNB</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOGE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TRX</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>XRP</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>TON</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>USD</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>EUR</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AED</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CNY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>JPY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>KZT</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="reset_values_btn">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>270</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Сбросить</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Данные взяты с сайта ЦБ РФ&lt;br/&gt;и сайта coingecko.com&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>270</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="reset_values_menu"/>
+    <addaction name="reset_curr"/>
+    <addaction name="refresh_rate"/>
+    <addaction name="separator"/>
+    <addaction name="exit_btn"/>
+   </widget>
+   <addaction name="menuMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="add_curr">
+   <property name="text">
+    <string>Добавить Валюту</string>
+   </property>
+  </action>
+  <action name="refresh_rate">
+   <property name="text">
+    <string>Обновить курс</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="exit_btn">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
+   </property>
+  </action>
+  <action name="reset_curr">
+   <property name="text">
+    <string>Сбросить валюты</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="reset_values_menu">
+   <property name="text">
+    <string>Сбросить значения</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
