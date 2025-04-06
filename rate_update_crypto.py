@@ -1,7 +1,7 @@
 import requests
 import csv
 import arrow
-from bs4 import BeautifulSoup as BS
+from dotenv import load_dotenv
 import os
 
 
@@ -23,11 +23,14 @@ crypto_list = (
 
 curr_values = []
 
-#!! Т.к. API бесплатный то он имеет ограничения по кол-ву запросов в месяц и минуту
-#!! использовать осторожно
+#! Т.к. API бесплатный то он имеет ограничения по кол-ву запросов в месяц и минуту
+#! использовать осторожно
 
+load_dotenv("APIKEYS.env")
 
 def update_currency_rate_crypto():
+    api_key = os.getenv("API_KEY")
+    print(api_key) # key checking
     for coin in crypto_list:
         try:
             # x = '1' + 0 #! для активации ошибки, чтобы не тратился API
@@ -35,7 +38,7 @@ def update_currency_rate_crypto():
             url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin_api}&vs_currencies=rub&precision=4"
             headers = {
                 "accept": "application/json",
-                "x-cg-demo-api-key": "CG-Nq3bK18xPt48dFjK4u5yR5uy",
+                "x-cg-demo-api-key": api_key,
             }
             r = requests.get(url, headers=headers)
             data = r.json()
