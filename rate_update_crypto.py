@@ -26,7 +26,7 @@ curr_values = []
 #! Т.к. API бесплатный то он имеет ограничения по кол-ву запросов в месяц и минуту
 #! использовать осторожно
 
-load_dotenv("APIKEYS.env")
+load_dotenv()
 
 def update_currency_rate_crypto():
     api_key = os.getenv("API_KEY")
