@@ -139,7 +139,7 @@ class Converter(QMainWindow):
             self.reset_values()
         elif (
             not changing_line_text[-1].isnumeric() and changing_line_text[-1] != "."
-        ) or changing_line_text.count(".") > 1:
+        ) or changing_line_text.count(".") >= 1:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Critical)
             msg.setText("Введите корректное значение")
