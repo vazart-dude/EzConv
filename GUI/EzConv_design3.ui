@@ -263,7 +263,7 @@ QTabBar::tab:selected {
       <height>291</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
+    <layout class="QGridLayout" name="gridLayout" columnminimumwidth="0,0,65,0">
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
@@ -533,7 +533,7 @@ QTabBar::tab:selected {
      <item row="3" column="2">
       <widget class="QComboBox" name="currency2">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>

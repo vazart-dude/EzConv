@@ -45,7 +45,7 @@ class Converter(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi(GUI_path, self)
-        self.setFixedSize(270, 344)
+        self.setFixedSize(270, 343)
 
         icon = QIcon(icon_path)
         self.setWindowIcon(icon)
