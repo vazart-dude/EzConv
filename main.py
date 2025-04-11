@@ -29,7 +29,7 @@ currency_list = {
     "USDT": os.path.join(script_path, "img", "USDT20.png"),
     "EUR": os.path.join(script_path, "img", "EUR20.png"),
     "AED": os.path.join(script_path, "img", "AED20.png"),
-    "CNY": os.path.join(script_path, "img", "CNY20.png"),
+    "CNY": os.path.join(script_path, "img", "CNY20_fixed.png"),
     "JPY": os.path.join(script_path, "img", "JPY20.png"),
     "KZT": os.path.join(script_path, "img", "KZT20.png"),
     "SOL": os.path.join(script_path, "img", "SOL20.png"),
@@ -40,19 +40,12 @@ currency_list = {
     "TON": os.path.join(script_path, "img", "TON20.png"),
 }
 
-# TODO// проверка интернет соединения
-# TODO// сделать, чтобы при смене валюты менялось значение
-# TODO// сделать наконец конвертацию по актуальному курсу
-# TODO//сделать обновление курса
-# TODO// сделать изменение картинки в зависимости от валюты
-# TODO// диалоговое окно для выхода
-
 
 class Converter(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi(GUI_path, self)
-        self.setFixedSize(270, 344)
+        self.setFixedSize(270, 343)
 
         icon = QIcon(icon_path)
         self.setWindowIcon(icon)
@@ -146,7 +139,7 @@ class Converter(QMainWindow):
             self.reset_values()
         elif (
             not changing_line_text[-1].isnumeric() and changing_line_text[-1] != "."
-        ) or changing_line_text.count(".") > 1:
+        ) or changing_line_text.count(".") >= 1:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Critical)
             msg.setText("Введите корректное значение")
