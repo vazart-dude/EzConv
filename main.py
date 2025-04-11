@@ -29,7 +29,7 @@ currency_list = {
     "USDT": os.path.join(script_path, "img", "USDT20.png"),
     "EUR": os.path.join(script_path, "img", "EUR20.png"),
     "AED": os.path.join(script_path, "img", "AED20.png"),
-    "CNY": os.path.join(script_path, "img", "CNY20.png"),
+    "CNY": os.path.join(script_path, "img", "CNY20_fixed.png"),
     "JPY": os.path.join(script_path, "img", "JPY20.png"),
     "KZT": os.path.join(script_path, "img", "KZT20.png"),
     "SOL": os.path.join(script_path, "img", "SOL20.png"),
