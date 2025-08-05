@@ -25,7 +25,7 @@ def update_currency_rate():
             if "," in num:
                 curr_values.append(num)
 
-        # print(curr_values) #!
+        print(curr_values, len(curr_values)) #!
 
         with open(currency_path, encoding="utf8") as csvfile:
             reader = csv.reader(csvfile, delimiter=";", quotechar='"')
