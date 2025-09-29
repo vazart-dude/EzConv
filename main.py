@@ -2,6 +2,7 @@ import os
 import csv
 import sys
 import requests
+import string
 from PyQt6.QtWidgets import (
     QMainWindow,
     QApplication,
@@ -57,7 +58,7 @@ class Converter(QMainWindow):
             self.currency3.setCurrentText(values[2])
             self.currency4.setCurrentText(values[3])
             self.currency5.setCurrentText(values[4])
-            
+
         if self.check_internet():
             update_currency_rate()  # обновление курса
         else:
@@ -74,13 +75,13 @@ class Converter(QMainWindow):
         self.exit_btn.triggered.connect(self.execution)  # выход через menu bar
 
         self.refresh_rate.triggered.connect(update_currency_rate)  # обновление валют
-        
+
         self.refresh_rate.triggered.connect(
             self.curr_error_test
         )  # проверка ошибок обновления крипты
         self.refresh_rate.triggered.connect(self.read_currency)
 
-        self.last_changed = 6
+        self.last_changed = None
 
         self.img_change()
 
@@ -88,22 +89,22 @@ class Converter(QMainWindow):
         # self.lineEdit_1 = QLineEdit
 
         self.currency1.activated.connect(lambda: self.img_change())
-        self.currency1.activated.connect(lambda: self.local_covert(0))
+        self.currency1.activated.connect(lambda: self.n(0))
         self.currency2.activated.connect(lambda: self.img_change())
-        self.currency2.activated.connect(lambda: self.local_covert(1))
+        self.currency2.activated.connect(lambda: self.n(1))
         self.currency3.activated.connect(lambda: self.img_change())
-        self.currency3.activated.connect(lambda: self.local_covert(2))
+        self.currency3.activated.connect(lambda: self.n(2))
         self.currency4.activated.connect(lambda: self.img_change())
-        self.currency4.activated.connect(lambda: self.local_covert(3))
+        self.currency4.activated.connect(lambda: self.n(3))
         self.currency5.activated.connect(lambda: self.img_change())
-        self.currency5.activated.connect(lambda: self.local_covert(4))
+        self.currency5.activated.connect(lambda: self.n(4))
 
         self.lineEdit_1.textChanged.connect(lambda: self.convert(0))
         self.lineEdit_2.textChanged.connect(lambda: self.convert(1))
         self.lineEdit_3.textChanged.connect(lambda: self.convert(2))
         self.lineEdit_4.textChanged.connect(lambda: self.convert(3))
         self.lineEdit_5.textChanged.connect(lambda: self.convert(4))
-        
+
         self.lines = [
             "self.lineEdit_1",
             "self.lineEdit_2",
@@ -137,9 +138,13 @@ class Converter(QMainWindow):
         changing_line_text = eval(self.lines[line]).text()
         if changing_line_text == "":
             self.reset_values()
+            self.last_changed = None
         elif (
-            not changing_line_text[-1].isnumeric() and changing_line_text[-1] != "."
-        ) or changing_line_text.count(".") >= 1:
+            changing_line_text.isalpha()
+            or changing_line_text[0] == "."
+            or (not changing_line_text[-1].isdigit() and changing_line_text[-1] != ".")
+            or changing_line_text.count(".") > 1
+        ):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Critical)
             msg.setText("Введите корректное значение")
@@ -221,14 +226,14 @@ class Converter(QMainWindow):
         ]
         with open(last_values_path, mode="w") as file:
             file.write(" ".join(values))
-        
-    def local_covert(self, line):  # конвертирование еденичной строки
+
+    def local_convert(self, line):  # конвертирование еденичной строки
         self.lineEdit_1.blockSignals(True)
         self.lineEdit_2.blockSignals(True)
         self.lineEdit_3.blockSignals(True)
         self.lineEdit_4.blockSignals(True)
         self.lineEdit_5.blockSignals(True)
-        if self.last_changed != 6 and eval(self.lines[0]).text() != "":
+        if self.last_changed != None and eval(self.lines[0]).text() != "":
             if self.last_changed == line:
                 self.convert(line)
             else:
@@ -304,11 +309,11 @@ class Converter(QMainWindow):
 
     def check_internet(x):
         try:
-            response = requests.get('https://www.google.com', timeout=5)
+            response = requests.get("https://www.google.com", timeout=5)
             return response.status_code == 200
         except requests.ConnectionError:
             return False
-    
+
     def internet_connection_error_msg(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Warning)
@@ -317,7 +322,7 @@ class Converter(QMainWindow):
         msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         msg.setModal(True)
         msg.exec()
-    
+
     def curr_update_msg(self):  # окно успешного обновления
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Information)
