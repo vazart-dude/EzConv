@@ -21,19 +21,15 @@ crypto_list = (
     ["TON", "the-open-network"],
 )
 
-curr_values = []
-
-#! Т.к. API бесплатный то он имеет ограничения по кол-ву запросов в месяц и минуту
-#! использовать осторожно
-
 load_dotenv()
+
 
 def update_currency_rate_crypto():
     api_key = os.getenv("API_KEY")
-    print("connected with api key:", api_key) # key checking
+    print("connected with api key:", api_key)  # key checking
+    curr_values = []
     for coin in crypto_list:
         try:
-            # x = '1' + 0 #! для активации ошибки, чтобы не тратился API
             coin_api = coin[1]
             url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin_api}&vs_currencies=rub&precision=4"
             headers = {
@@ -46,18 +42,22 @@ def update_currency_rate_crypto():
             curr_values.append(float(coin_price))
         except Exception as e:
             print(f"Error: {e} for {coin[0]}")
-            return True
-    
+            return False
+
     try:
         with open(crypto_currency_path, encoding="utf8") as csvfile:
             reader = csv.reader(csvfile, delimiter=";", quotechar='"')
             rows = [[value[0], value[1]] for value in reader]
+            if len(curr_values) != len(rows):
+                print(f"Length mismatch: got {len(curr_values)} values, expected {len(rows)}")
+                return False
             for x in range(len(curr_values)):
                 rows[x][1] = curr_values[x]
                 rows[x].append(1)
             print("passed reader")
     except Exception as e:
         print("Error while reading currency:", e)
+        return False
 
     try:
         with open(crypto_currency_path, mode="w", newline="", encoding="utf-8") as file:
@@ -65,7 +65,9 @@ def update_currency_rate_crypto():
             writer.writerows(rows)
             print("passed writer")
     except Exception as e:
-        print("Error wjile writing currency:", e)
+        print("Error while writing currency:", e)
+        return False
 
     with open(log_path, mode="a") as file:
         file.write(f"crypto updated {arrow.now().format('YYYY-MM-DD HH:mm')}\n")
+    return True

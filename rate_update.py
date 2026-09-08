@@ -25,14 +25,16 @@ def update_currency_rate():
             if "," in num:
                 curr_values.append(num)
 
-        print(curr_values, len(curr_values)) #!
+        print(curr_values, len(curr_values))  # !
 
         with open(currency_path, encoding="utf8") as csvfile:
             reader = csv.reader(csvfile, delimiter=";", quotechar='"')
             rows = [[value[0], value[1], value[2]] for value in reader]
+            if len(curr_values) != len(rows):
+                print(f"Length mismatch: got {len(curr_values)} values, expected {len(rows)}")
+                return
             for x in range(len(curr_values)):
                 rows[x][1] = curr_values[x].replace(",", ".")
-            # print(rows)
         with open(currency_path, mode="w", newline="", encoding="utf-8") as file:
             writer = csv.writer(file, delimiter=";")
             writer.writerows(rows)
