@@ -1,4 +1,4 @@
-import os
+﻿import os
 import csv
 import sys
 import requests
@@ -64,33 +64,31 @@ class Converter(QMainWindow):
             pass
 
         if self.check_internet():
-            update_currency_rate()  # обновление курса
+            if not update_currency_rate():
+                self.curr_fiat_update_error_msg()
         else:
             self.internet_connection_error_msg()
 
         self.read_currency()
 
-        self.reset_curr.triggered.connect(self.reset)  # сброс валют
+        self.reset_curr.triggered.connect(self.reset)
 
         self.reset_values_btn.clicked.connect(self.reset_values)
 
         self.reset_values_menu.triggered.connect(self.reset_values)
 
-        self.exit_btn.triggered.connect(self.execution)  # выход через menu bar
+        self.exit_btn.triggered.connect(self.execution)
 
-        self.refresh_rate.triggered.connect(update_currency_rate)  # обновление валют
+        self.refresh_rate.triggered.connect(self._refresh_fiat_rates)
 
         self.refresh_rate.triggered.connect(
             self.curr_error_test
-        )  # проверка ошибок обновления крипты
+        )
         self.refresh_rate.triggered.connect(self.read_currency)
 
         self.last_changed = None
 
         self.img_change()
-
-        # self.currency1 = QComboBox
-        # self.lineEdit_1 = QLineEdit
 
         self.currency1.activated.connect(self.img_change)
         self.currency2.activated.connect(self.img_change)
@@ -128,7 +126,7 @@ class Converter(QMainWindow):
             reader = csv.reader(csvfile, delimiter=";", quotechar='"')
             self.crypto_rows = [[value[0], value[1], value[2]] for value in reader]
 
-    def convert(self, line):  # конвертирование
+    def convert(self, line):
         self._block_all_signals()
         changing_line_text = self.line_edits[line].text()
 
@@ -215,9 +213,7 @@ class Converter(QMainWindow):
     ) -> float:
         return round(amount * ((from_rate / from_mult) / (to_rate / to_mult)), 4)
 
-    def img_change(
-        self,
-    ):  # обновление картинок + сохранение последних выбранных валют
+    def img_change(self):
         self.img1.setPixmap(QPixmap(currency_list[self.currency1.currentText()]))
         self.img2.setPixmap(QPixmap(currency_list[self.currency2.currentText()]))
         self.img3.setPixmap(QPixmap(currency_list[self.currency3.currentText()]))
@@ -233,7 +229,7 @@ class Converter(QMainWindow):
         with open(last_values_path, mode="w", encoding="UTF-8") as file:
             file.write(" ".join(values))
 
-    def reset(self):  # сброс валют
+    def reset(self):
         self.currency1.setCurrentText("BTC")
         self.currency2.setCurrentText("USDT")
         self.currency3.setCurrentText("USD")
@@ -269,7 +265,7 @@ class Converter(QMainWindow):
         msg.setModal(True)
         msg.exec()
 
-    def curr_update_msg(self):  # окно успешного обновления
+    def curr_update_msg(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Information)
         msg.setText("Курс обновлён до актуального")
@@ -278,13 +274,13 @@ class Converter(QMainWindow):
         msg.setModal(True)
         msg.exec()
 
-    def curr_error_test(self):  # проверка на наличие ошибок обновления курса
+    def curr_error_test(self):
         if update_currency_rate_crypto():
             self.curr_update_msg()
         else:
             self.curr_update_error_msg()
 
-    def curr_update_error_msg(self):  # ошибка обновления курса крипты
+    def curr_update_error_msg(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Critical)
         msg.setText("Ошибка обновления курса криптовалют")
@@ -292,7 +288,20 @@ class Converter(QMainWindow):
         msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         msg.exec()
 
-    def execution(self):  # выход
+    def curr_fiat_update_error_msg(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText("Ошибка обновления курса фиатных валют")
+        msg.setWindowTitle("Ошибка")
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.setModal(True)
+        msg.exec()
+
+    def _refresh_fiat_rates(self):
+        if not update_currency_rate():
+            self.curr_fiat_update_error_msg()
+
+    def execution(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Question)
         msg.setText("Вы уверены, что хотите выйти?")
