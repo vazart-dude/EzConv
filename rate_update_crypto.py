@@ -2,10 +2,17 @@
 import csv
 import arrow
 import os
+import shutil
 
+# Resource paths (read-only, bundled with app)
 script_path = os.path.dirname(os.path.abspath(__file__))
-crypto_currency_path = os.path.join(script_path, "bin", "crypto_currency.csv")
-log_path = os.path.join(script_path, "bin", "log.txt")
+resource_crypto_path = os.path.join(script_path, "bin", "crypto_currency.csv")
+
+# Writable data directory (user-specific)
+app_data_dir = os.path.join(os.environ.get("APPDATA", script_path), "EzConv")
+os.makedirs(app_data_dir, exist_ok=True)
+log_path = os.path.join(app_data_dir, "log.txt")
+crypto_currency_path = os.path.join(app_data_dir, "crypto_currency.csv")
 
 crypto_list = (
     ["BTC", "bitcoin"],
@@ -20,7 +27,14 @@ crypto_list = (
 )
 
 
+def _ensure_data_files():
+    """Copy crypto currency data files from resources to writable app data dir if missing."""
+    if not os.path.exists(crypto_currency_path):
+        shutil.copy2(resource_crypto_path, crypto_currency_path)
+
+
 def update_currency_rate_crypto():
+    _ensure_data_files()
     try:
         usd_rub_r = requests.get("https://open.er-api.com/v6/latest/USD", timeout=10)
         usd_rub_r.raise_for_status()

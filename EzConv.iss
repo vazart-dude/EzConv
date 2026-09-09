@@ -13,48 +13,45 @@ AppUpdatesURL=https://github.com/EzConv/releases
 VersionInfoVersion=0.1.0
 VersionInfoCompany=EzConv Team
 VersionInfoProductName=EzConv
-VersionInfoProductVersion=0.1.0
-VersionInfoLanguage=1033
 VersionInfoCopyright=Copyright (C) 2026 EzConv Team
 VersionInfoProductVersion=0.1.0
 
 ; Directories
 DefaultDirName={pf}\EzConv
+DefaultGroupName=EzConv
 CreateAppDir=False
 DisableProgramGroupPage=no
 
 ; Compression
-Compression=lzma
+Compression=lzma2/max
 SolidCompression=yes
 OutputDir=Output
-OutputExeName=EzConv_Setup.exe
+OutputBaseFilename=EzConv_Setup
 
 ; Architecture (64-bit only)
 ArchitecturesAllowed=x64
-ArchitecturesInstallIn64BitMode=yes
+ArchitecturesInstallIn64BitMode=x64compatible
 
 ; Icons
-IconFile=bitcoin.ico
+SetupIconFile=bitcoin.ico
 
 ; Privileges
 PrivilegesRequired=none
 
 ; Uninstall
 Uninstallable=yes
-UninstallIconIconFile={app}\EzConv.exe
+UninstallDisplayIcon={app}\EzConv.exe
 
-; Languages
-Languages=english
 
 [Files]
 Source: "dist\EzConv\EzConv.exe"; DestDir: "{app}"
-Source: "dist\EzConv\_internal\*"; DestDir: "{app}\_internal"; Flags: recursedirs ignoreversion
+Source: "dist\EzConv\_internal\*"; DestDir: "{app}\_internal"; Flags: recursesubdirs ignoreversion
 Source: "bitcoin.ico"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\EzConv"; Filename: "{app}\EzConv.exe"; IconFilename: "{app}\EzConv.exe"
 Name: "{commondesktop}\EzConv"; Filename: "{app}\EzConv.exe"; IconFilename: "{app}\EzConv.exe"; IconIndex:0; Tasks: desktopicon
-Name: "{group}\Uninstall {AppName}"; Filename: "{uninstallexe}"; IconFilename: "{uninstallexe}"
+Name: "{group}\Uninstall EzConv"; Filename: "{uninstallexe}"; IconFilename: "{uninstallexe}"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
@@ -66,7 +63,6 @@ Root: HKCU; Subkey: "Software\EzConv"; ValueName: "Installed"; ValueData: "1"
 procedure InitializeWizard;
 begin
   WizardForm.Caption := 'EzConv Setup';
-  WizardForm.Description.Caption := 'EzConv - Currency Converter' + #13#10 + 'Version 0.1.0';
 end;
 
 function InitializeSetup: Boolean;
@@ -75,9 +71,10 @@ begin
 end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
-begin
-  if CurUninstallStep = usUninstall then
   begin
-    DeleteFile('{app}\last_values.txt');
-  end;
+    if CurUninstallStep = usUninstall then
+    begin
+      // Clean up user data
+      DelTree(ExpandConstant('{%APPDATA}\EzConv'), True, True, True);
+    end;
 end;

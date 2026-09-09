@@ -2,13 +2,27 @@
 import csv
 import arrow
 import os
+import shutil
 
+# Resource paths (read-only, bundled with app)
 script_path = os.path.dirname(os.path.abspath(__file__))
-currency_path = os.path.join(script_path, "bin", "currency.csv")
-log_path = os.path.join(script_path, "bin", "log.txt")
+resource_currency_path = os.path.join(script_path, "bin", "currency.csv")
+
+# Writable data directory (user-specific)
+app_data_dir = os.path.join(os.environ.get("APPDATA", script_path), "EzConv")
+os.makedirs(app_data_dir, exist_ok=True)
+log_path = os.path.join(app_data_dir, "log.txt")
+currency_path = os.path.join(app_data_dir, "currency.csv")
+
+
+def _ensure_data_files():
+    """Copy currency data files from resources to writable app data dir if missing."""
+    if not os.path.exists(currency_path):
+        shutil.copy2(resource_currency_path, currency_path)
 
 
 def update_currency_rate():
+    _ensure_data_files()
     try:
         r = requests.get("https://open.er-api.com/v6/latest/RUB", timeout=10)
         r.raise_for_status()

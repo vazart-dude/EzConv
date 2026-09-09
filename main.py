@@ -13,12 +13,17 @@ from PyQt6.QtGui import QIcon, QPixmap
 from rate_update import update_currency_rate
 from rate_update_crypto import update_currency_rate_crypto
 
+# Resource paths (read-only, bundled with app)
 script_path = os.path.dirname(os.path.abspath(__file__))
 currency_path = os.path.join(script_path, "bin", "currency.csv")
 crypto_currency_path = os.path.join(script_path, "bin", "crypto_currency.csv")
 GUI_path = os.path.join(script_path, "GUI", "EzConv_design3.ui")
-last_values_path = os.path.join(script_path, "bin", "last_values.txt")
 icon_path = os.path.join(script_path, "img", "Bitcoin.svg.png")
+
+# Writable data directory (user-specific)
+app_data_dir = os.path.join(os.environ.get("APPDATA", script_path), "EzConv")
+os.makedirs(app_data_dir, exist_ok=True)
+last_values_path = os.path.join(app_data_dir, "last_values.txt")
 
 crypto_list = ("BTC", "ETH", "USDT", "SOL", "BNB", "DOGE", "TRX", "XRP", "TON")
 
