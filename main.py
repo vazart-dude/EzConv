@@ -1,7 +1,8 @@
-import os
+﻿import os
 import csv
 import sys
 import requests
+import string
 from PyQt6.QtWidgets import (
     QMainWindow,
     QApplication,
@@ -50,73 +51,70 @@ class Converter(QMainWindow):
         icon = QIcon(icon_path)
         self.setWindowIcon(icon)
 
-        with open(last_values_path) as file:
-            values = file.read().split()
-            self.currency1.setCurrentText(values[0])
-            self.currency2.setCurrentText(values[1])
-            self.currency3.setCurrentText(values[2])
-            self.currency4.setCurrentText(values[3])
-            self.currency5.setCurrentText(values[4])
-            
+        try:
+            with open(last_values_path) as file:
+                values = file.read().split()
+                if len(values) >= 5:
+                    self.currency1.setCurrentText(values[0])
+                    self.currency2.setCurrentText(values[1])
+                    self.currency3.setCurrentText(values[2])
+                    self.currency4.setCurrentText(values[3])
+                    self.currency5.setCurrentText(values[4])
+        except FileNotFoundError:
+            pass
+
         if self.check_internet():
-            update_currency_rate()  # обновление курса
+            if not update_currency_rate():
+                self.curr_fiat_update_error_msg()
         else:
             self.internet_connection_error_msg()
 
         self.read_currency()
 
-        self.reset_curr.triggered.connect(self.reset)  # сброс валют
+        self.reset_curr.triggered.connect(self.reset)
 
         self.reset_values_btn.clicked.connect(self.reset_values)
 
         self.reset_values_menu.triggered.connect(self.reset_values)
 
-        self.exit_btn.triggered.connect(self.execution)  # выход через menu bar
+        self.exit_btn.triggered.connect(self.execution)
 
-        self.refresh_rate.triggered.connect(update_currency_rate)  # обновление валют
-        
+        self.refresh_rate.triggered.connect(self._refresh_fiat_rates)
+
         self.refresh_rate.triggered.connect(
             self.curr_error_test
-        )  # проверка ошибок обновления крипты
+        )
         self.refresh_rate.triggered.connect(self.read_currency)
 
-        self.last_changed = 6
+        self.last_changed = None
 
         self.img_change()
 
-        # self.currency1 = QComboBox
-        # self.lineEdit_1 = QLineEdit
-
-        self.currency1.activated.connect(lambda: self.img_change())
-        self.currency1.activated.connect(lambda: self.local_covert(0))
-        self.currency2.activated.connect(lambda: self.img_change())
-        self.currency2.activated.connect(lambda: self.local_covert(1))
-        self.currency3.activated.connect(lambda: self.img_change())
-        self.currency3.activated.connect(lambda: self.local_covert(2))
-        self.currency4.activated.connect(lambda: self.img_change())
-        self.currency4.activated.connect(lambda: self.local_covert(3))
-        self.currency5.activated.connect(lambda: self.img_change())
-        self.currency5.activated.connect(lambda: self.local_covert(4))
+        self.currency1.activated.connect(self.img_change)
+        self.currency2.activated.connect(self.img_change)
+        self.currency3.activated.connect(self.img_change)
+        self.currency4.activated.connect(self.img_change)
+        self.currency5.activated.connect(self.img_change)
 
         self.lineEdit_1.textChanged.connect(lambda: self.convert(0))
         self.lineEdit_2.textChanged.connect(lambda: self.convert(1))
         self.lineEdit_3.textChanged.connect(lambda: self.convert(2))
         self.lineEdit_4.textChanged.connect(lambda: self.convert(3))
         self.lineEdit_5.textChanged.connect(lambda: self.convert(4))
-        
-        self.lines = [
-            "self.lineEdit_1",
-            "self.lineEdit_2",
-            "self.lineEdit_3",
-            "self.lineEdit_4",
-            "self.lineEdit_5",
+
+        self.line_edits = [
+            self.lineEdit_1,
+            self.lineEdit_2,
+            self.lineEdit_3,
+            self.lineEdit_4,
+            self.lineEdit_5,
         ]
-        self.currencies = [
-            "self.currency1",
-            "self.currency2",
-            "self.currency3",
-            "self.currency4",
-            "self.currency5",
+        self.combo_boxes = [
+            self.currency1,
+            self.currency2,
+            self.currency3,
+            self.currency4,
+            self.currency5,
         ]
 
     def read_currency(self):
@@ -128,85 +126,94 @@ class Converter(QMainWindow):
             reader = csv.reader(csvfile, delimiter=";", quotechar='"')
             self.crypto_rows = [[value[0], value[1], value[2]] for value in reader]
 
-    def convert(self, line):  # конвертирование
-        self.lineEdit_1.blockSignals(True)
-        self.lineEdit_2.blockSignals(True)
-        self.lineEdit_3.blockSignals(True)
-        self.lineEdit_4.blockSignals(True)
-        self.lineEdit_5.blockSignals(True)
-        changing_line_text = eval(self.lines[line]).text()
+    def convert(self, line):
+        self._block_all_signals()
+        changing_line_text = self.line_edits[line].text()
+
         if changing_line_text == "":
             self.reset_values()
-        elif (
-            not changing_line_text[-1].isnumeric() and changing_line_text[-1] != "."
-        ) or changing_line_text.count(".") >= 1:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Critical)
-            msg.setText("Введите корректное значение")
-            msg.setWindowTitle("Ошибка")
-            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
-            msg.setModal(True)
-            msg.exec()
-            self.lineEdit_1.blockSignals(False)
-            self.lineEdit_2.blockSignals(False)
-            self.lineEdit_3.blockSignals(False)
-            self.lineEdit_4.blockSignals(False)
-            self.lineEdit_5.blockSignals(False)
-            eval(self.lines[line]).setText(changing_line_text[:-1])
-            return ValueError
+            self.last_changed = None
+        elif not self._is_valid_number(changing_line_text):
+            self._show_error_dialog("Введите корректное значение")
+            self.line_edits[line].setText(changing_line_text[:-1])
+            self._unblock_all_signals()
+            return
         else:
-            changing_currency = eval(self.currencies[line]).currentText()
-            lines = self.lines.copy()
-            currencies = self.currencies.copy()
-            del lines[line]
-            del currencies[line]
-            if changing_currency in crypto_list:
-                for row in self.crypto_rows:
-                    if row[0] == changing_currency:
-                        changing_currency, changing_rate, changing_multiplicator = row
-                        break
-            else:
-                for row in self.curr_rows:
-                    if row[0] == changing_currency:
-                        changing_currency, changing_rate, changing_multiplicator = row
-                        break
+            changing_currency = self.combo_boxes[line].currentText()
+            changing_rate, changing_multiplicator = self._get_currency_rate(
+                changing_currency
+            )
 
-            for x in range(4):
-                making_line = lines[x]
-                making_currency = eval(currencies[x]).currentText()
-                if making_currency in crypto_list:
-                    for row in self.crypto_rows:
-                        if row[0] == making_currency:
-                            making_currency, making_rate, making_multiplicator = row
-                            break
-                else:
-                    for row in self.curr_rows:
-                        if row[0] == making_currency:
-                            making_currency, making_rate, making_multiplicator = row
-                            break
-                eval(making_line).setText(
-                    str(
-                        round(
-                            float(changing_line_text)
-                            * (
-                                (float(changing_rate) / (float(changing_multiplicator)))
-                                / (float(making_rate) / (float(making_multiplicator)))
-                            ),
-                            4,
-                        )
-                    )
+            other_indices = [i for i in range(5) if i != line]
+            for idx in other_indices:
+                making_currency = self.combo_boxes[idx].currentText()
+                making_rate, making_multiplicator = self._get_currency_rate(
+                    making_currency
                 )
-        self.lineEdit_1.blockSignals(False)
-        self.lineEdit_2.blockSignals(False)
-        self.lineEdit_3.blockSignals(False)
-        self.lineEdit_4.blockSignals(False)
-        self.lineEdit_5.blockSignals(False)
+                converted_value = self._calculate_conversion(
+                    float(changing_line_text),
+                    changing_rate,
+                    changing_multiplicator,
+                    making_rate,
+                    making_multiplicator,
+                )
+                self.line_edits[idx].setText(str(converted_value))
+
+        self._unblock_all_signals()
         self.last_changed = line
         print(self.last_changed)
 
-    def img_change(
+    def _block_all_signals(self):
+        for le in self.line_edits:
+            le.blockSignals(True)
+
+    def _unblock_all_signals(self):
+        for le in self.line_edits:
+            le.blockSignals(False)
+
+    def _is_valid_number(self, text: str) -> bool:
+        if text.isalpha():
+            return False
+        if text[0] == ".":
+            return False
+        if not (text[-1].isdigit() or text[-1] == "."):
+            return False
+        if text.count(".") > 1:
+            return False
+        return True
+
+    def _show_error_dialog(self, message: str):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText(message)
+        msg.setWindowTitle("Ошибка")
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.setModal(True)
+        msg.exec()
+
+    def _get_currency_rate(self, currency: str) -> tuple[float, float]:
+        if currency in crypto_list:
+            rows = self.crypto_rows
+        else:
+            rows = self.curr_rows
+
+        for row in rows:
+            if row[0] == currency:
+                _, rate, multiplicator = row
+                return float(rate), float(multiplicator)
+        raise ValueError(f"Currency not found: {currency}")
+
+    def _calculate_conversion(
         self,
-    ):  # обновление картинок + сохранение последних выбранных валют
+        amount: float,
+        from_rate: float,
+        from_mult: float,
+        to_rate: float,
+        to_mult: float,
+    ) -> float:
+        return round(amount * ((from_rate / from_mult) / (to_rate / to_mult)), 4)
+
+    def img_change(self):
         self.img1.setPixmap(QPixmap(currency_list[self.currency1.currentText()]))
         self.img2.setPixmap(QPixmap(currency_list[self.currency2.currentText()]))
         self.img3.setPixmap(QPixmap(currency_list[self.currency3.currentText()]))
@@ -219,70 +226,10 @@ class Converter(QMainWindow):
             self.currency4.currentText(),
             self.currency5.currentText(),
         ]
-        with open(last_values_path, mode="w") as file:
+        with open(last_values_path, mode="w", encoding="UTF-8") as file:
             file.write(" ".join(values))
-        
-    def local_covert(self, line):  # конвертирование еденичной строки
-        self.lineEdit_1.blockSignals(True)
-        self.lineEdit_2.blockSignals(True)
-        self.lineEdit_3.blockSignals(True)
-        self.lineEdit_4.blockSignals(True)
-        self.lineEdit_5.blockSignals(True)
-        if self.last_changed != 6 and eval(self.lines[0]).text() != "":
-            if self.last_changed == line:
-                self.convert(line)
-            else:
-                changing_line_text = eval(self.lines[self.last_changed]).text()
-                changing_currency = eval(
-                    self.currencies[self.last_changed]
-                ).currentText()
-                print(changing_line_text)
-                print(changing_currency)
-                if changing_currency in crypto_list:
-                    for row in self.crypto_rows:
-                        if row[0] == changing_currency:
-                            changing_currency, changing_rate, changing_multiplicator = (
-                                row
-                            )
-                            break
-                else:
-                    for row in self.curr_rows:
-                        if row[0] == changing_currency:
-                            changing_currency, changing_rate, changing_multiplicator = (
-                                row
-                            )
-                            break
-                making_line = self.lines[line]
-                making_currency = eval(self.currencies[line]).currentText()
-                if making_currency in crypto_list:
-                    for row in self.crypto_rows:
-                        if row[0] == making_currency:
-                            making_currency, making_rate, making_multiplicator = row
-                            break
-                else:
-                    for row in self.curr_rows:
-                        if row[0] == making_currency:
-                            making_currency, making_rate, making_multiplicator = row
-                            break
-                eval(making_line).setText(
-                    str(
-                        round(
-                            float(changing_line_text)
-                            * (
-                                (float(changing_rate) / (float(changing_multiplicator)))
-                                / (float(making_rate) / (float(making_multiplicator)))
-                            ),
-                            4,
-                        )
-                    )
-                )
-        self.lineEdit_1.blockSignals(False)
-        self.lineEdit_2.blockSignals(False)
-        self.lineEdit_3.blockSignals(False)
-        self.lineEdit_4.blockSignals(False)
-        self.lineEdit_5.blockSignals(False)
 
-    def reset(self):  # сброс валют
+    def reset(self):
         self.currency1.setCurrentText("BTC")
         self.currency2.setCurrentText("USDT")
         self.currency3.setCurrentText("USD")
@@ -302,13 +249,13 @@ class Converter(QMainWindow):
         self.lineEdit_4.setText("")
         self.lineEdit_5.setText("")
 
-    def check_internet(x):
+    def check_internet(self):
         try:
-            response = requests.get('https://www.google.com', timeout=5)
+            response = requests.get("https://www.google.com", timeout=5)
             return response.status_code == 200
-        except requests.ConnectionError:
+        except requests.RequestException:
             return False
-    
+
     def internet_connection_error_msg(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Warning)
@@ -317,8 +264,8 @@ class Converter(QMainWindow):
         msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         msg.setModal(True)
         msg.exec()
-    
-    def curr_update_msg(self):  # окно успешного обновления
+
+    def curr_update_msg(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Information)
         msg.setText("Курс обновлён до актуального")
@@ -327,13 +274,13 @@ class Converter(QMainWindow):
         msg.setModal(True)
         msg.exec()
 
-    def curr_error_test(self):  # проверка на наличие ошибок обновления курса
+    def curr_error_test(self):
         if update_currency_rate_crypto():
-            self.curr_update_error_msg()
-        else:
             self.curr_update_msg()
+        else:
+            self.curr_update_error_msg()
 
-    def curr_update_error_msg(self):  # ошибка обновления курса крипты
+    def curr_update_error_msg(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Critical)
         msg.setText("Ошибка обновления курса криптовалют")
@@ -341,7 +288,20 @@ class Converter(QMainWindow):
         msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         msg.exec()
 
-    def execution(self):  # выход
+    def curr_fiat_update_error_msg(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setText("Ошибка обновления курса фиатных валют")
+        msg.setWindowTitle("Ошибка")
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.setModal(True)
+        msg.exec()
+
+    def _refresh_fiat_rates(self):
+        if not update_currency_rate():
+            self.curr_fiat_update_error_msg()
+
+    def execution(self):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Icon.Question)
         msg.setText("Вы уверены, что хотите выйти?")
